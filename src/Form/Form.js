@@ -17,12 +17,12 @@ class Form extends Component {
   }
 
   submitReservation = (event) => {
-    event.preventDefault(); // prevents the page from refreshing when the form submits
+    event.preventDefault();
     const newRes = {
       ...this.state
     }
-    this.props.addReservation(newRes); // using the addIdea method from App that we passed as a prop to Form
-    this.clearInputs(); // invoking the method I wrote below to reset the inputs
+    this.props.addReservation(newRes); 
+    this.clearInputs();
   }
 
   clearInputs = () => {
