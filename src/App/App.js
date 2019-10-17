@@ -19,16 +19,38 @@ class App extends Component {
       this.setState({
         reservations: res
       }))
+    .catch(error => console.log(error))
   }
 
   addReservation = (newRes) => {
-  this.setState({ reservations: [...this.state.reservations, newRes] });
+    fetch('http://localhost:3001/api/v1/reservations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: newRes.name,
+        date: newRes.date,
+        time: newRes.time,
+        number: newRes.number
+      })
+    })
+    this.setState({ reservations: [...this.state.reservations, newRes] });
+
 }
 
   cancelReservation = (id) => {
-    console.log(id)
+
+
+    fetch(`http://localhost:3001/api/v1/reservations/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });      
     const filteredRes = this.state.reservations.filter(reservation =>
       reservation.id !== id);
+
       this.setState({ reservations: filteredRes })
   }
 
